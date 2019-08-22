@@ -3,12 +3,58 @@ package br.ufpe.cin.android.calculadora
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
+import android.widget.EditText
+import android.widget.Button
+import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_main.*
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        ///setting listener to number buttons
+        btn_0.setOnClickListener { text_calc.text.append((it as Button).text) }
+        btn_1.setOnClickListener { text_calc.text.append((it as Button).text) }
+        btn_2.setOnClickListener { text_calc.text.append((it as Button).text) }
+        btn_3.setOnClickListener { text_calc.text.append((it as Button).text) }
+        btn_4.setOnClickListener { text_calc.text.append((it as Button).text) }
+        btn_5.setOnClickListener { text_calc.text.append((it as Button).text) }
+        btn_6.setOnClickListener { text_calc.text.append((it as Button).text) }
+        btn_7.setOnClickListener { text_calc.text.append((it as Button).text) }
+        btn_8.setOnClickListener { text_calc.text.append((it as Button).text) }
+        btn_9.setOnClickListener { text_calc.text.append((it as Button).text) }
+
+        //setting listener to operators
+        btn_Add.setOnClickListener { text_calc.text.append((it as Button).text) }
+        btn_Subtract.setOnClickListener { text_calc.text.append((it as Button).text) }
+        btn_Multiply.setOnClickListener { text_calc.text.append((it as Button).text) }
+        btn_Divide.setOnClickListener { text_calc.text.append((it as Button).text) }
+        btn_Power.setOnClickListener { text_calc.text.append((it as Button).text) }
+        btn_Dot.setOnClickListener { text_calc.text.append(btn_Dot.text) }
+        btn_RParen.setOnClickListener { text_calc.append(btn_RParen.text) }
+        btn_LParen.setOnClickListener { text_calc.text.append((it as Button).text) }
+
+        //setting listener to clear button
+        btn_Clear.setOnClickListener{
+            text_calc.text = null
+            text_info.text = null
+        }
+
+        //setting lsitener to equal button
+        btn_Equal.setOnClickListener{
+            try {
+                text_info.text = eval(text_calc.text.toString()).toString()
+            }
+            catch (e: Exception){
+                Toast.makeText(this, "Expressao equivocada ", Toast.LENGTH_SHORT).show()
+            }
+        }
+
     }
+
+
 
 
     //Como usar a função:
