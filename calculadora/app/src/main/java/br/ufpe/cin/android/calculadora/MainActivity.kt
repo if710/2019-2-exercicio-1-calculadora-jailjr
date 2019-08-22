@@ -33,25 +33,34 @@ class MainActivity : AppCompatActivity() {
         btn_Divide.setOnClickListener { text_calc.text.append((it as Button).text) }
         btn_Power.setOnClickListener { text_calc.text.append((it as Button).text) }
         btn_Dot.setOnClickListener { text_calc.text.append(btn_Dot.text) }
-        btn_RParen.setOnClickListener { text_calc.append(btn_RParen.text) }
+        btn_RParen.setOnClickListener { text_calc.text.append(btn_RParen.text) }
         btn_LParen.setOnClickListener { text_calc.text.append((it as Button).text) }
 
         //setting listener to clear button
-        btn_Clear.setOnClickListener{
+        btn_Clear.setOnClickListener {
             text_calc.text = null
-            text_info.text = null
+            text_info.text = ""
         }
 
         //setting lsitener to equal button
-        btn_Equal.setOnClickListener{
+        btn_Equal.setOnClickListener {
             try {
                 text_info.text = eval(text_calc.text.toString()).toString()
-            }
-            catch (e: Exception){
+            } catch (e: Exception) {
                 Toast.makeText(this, "Expressao equivocada ", Toast.LENGTH_SHORT).show()
             }
+
         }
 
+        text_calc.setText(savedInstanceState?.getString("Expressao"))
+        text_info.text = savedInstanceState?.getString("Resultado")
+
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString("Resultado", text_info.text.toString())
+        outState.putString("Expressao", text_calc.text.toString())
+        super.onSaveInstanceState(outState)
     }
 
 
